@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+    <meta charset="UTF-8">
+    <title>Add Education Page</title>
+    <link th:rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+    <script th:src="@{/js/bootstrap.min.js}"></script>
+</head>
+<body>
+<div th:insert="~{fragments/header :: header}"></div>
+
+<div class="container w-50 p-5 my-5">
+    <h1 class="display-5">การศึกษาของฉัน</h1>
+    <form th:action="@{/edu/add}" method="post">
+        <div class="form-group">
+            <div class="mb-3">
+                <label for="inputNameOfAcademy">ชื่อสถาบันการศึกษา</label>
+                <input required id="inputNameOfAcademy" type="text" class="form-control" placeholder="กรอกชื่อสถาบันการศึกษา"
+                       name="nameOfAcademy">
+            </div>
+            <div class="mb-3">
+                <label for="inputLevel">ระดับการศึกษา</label>
+                <select id="inputLevel" name="level" class="form-select" >
+                    <option>ระดับประถมศึกษา</option>
+                    <option>ระดับมัธยมศึกษา</option>
+                    <option>ระดับอุดมศึกษา</option>
+                </select>
+            </div>
+            <div class="mb-3">
+                <label for="inputYearStart">ปีแรกเข้า</label>
+                <input required id="inputYearStart" type="text" class="form-control" placeholder="เช่น ปี ค.ศ.1950"
+                       name="yearsStart">
+            </div>
+            <div class="mb-3">
+                <label for="inputYearEnd">ปีที่จบการศึกษา</label>
+                <input required id="inputYearEnd" type="text" class="form-control" placeholder="เช่น ปี ค.ศ.1960"
+                       name="yearsEnd">
+            </div>
+            <button id="submit-button" type="submit" class="btn btn-primary">ยืนยัน</button>
+            <a id="back-button" class="btn btn-secondary" th:href="@{/profiles}">ย้อนกลับ</a>
+        </div>
+    </form>
+
+</div>
+</body>
+</html>

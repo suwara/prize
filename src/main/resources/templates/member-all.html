@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+    <meta charset="UTF-8">
+    <title>Show All Member Page</title>
+    <link th:rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+    <script th:src="@{/js/bootstrap.min.js}"></script>
+</head>
+<body>
+<div th:insert="~{fragments/header :: header}"></div>
+
+<div class="container w-50 p-5 my-5">
+    <h1 class="display-6">Member's Web application Prize</h1>
+
+    <table class="table table-bordered table-striped table-hover">
+        <thead class="thead-primary text-center">
+            <tr>
+                <th>Username</th>
+                <th>Role</th>
+                <th>Edit</th>
+                <th>Delete</th>
+            </tr>
+        </thead>
+        <tbody class="text-center">
+            <tr th:each="member : ${members}">
+                <td th:text="${member.username}"></td>
+                <td th:text="${member.role}"></td>
+                <td>
+                    <a class="btn btn-primary btn-sm" th:href="@{/admin/members/edit/{id} (id=${member.id})}">Edit</a>
+                </td>
+                <td>
+                    <form th:action="@{/admin/members/delete/{id} (id=${member.id})}" method="post">
+                        <button class="btn btn-danger btn-sm" id="delete-button" onclick="return confirm('ต้องการลบข้อมูลนี้หรือไม่?')" type="submit">Delete</button>
+                    </form>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>

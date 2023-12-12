@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+    <meta charset="UTF-8">
+    <title>Show All Prizes Page</title>
+    <link th:rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+    <script th:src="@{/js/bootstrap.min.js}"></script>
+</head>
+<body>
+<div th:insert="~{fragments/header :: header}"></div>
+
+<div class="container w-75 p-5 my-5">
+    <div class="row">
+        <h1 class="display-6">รายการรางวัลของฉัน</h1>
+        <a class="link-offset-3-hover link-underline-opacity-0" th:href="@{/prizes/add}">เพิ่มรายการ</a>
+    </div>
+
+
+    <table  class="table table-bordered table-striped table-hover">
+        <thead class="thead-primary text-center">
+        <tr>
+            <th>วันที่</th>
+            <th>กิจกรรม</th>
+            <th>ประเภท</th>
+            <th>รางวัล</th>
+            <th>หน่วยงานที่จัด</th>
+            <th>ชื่อผู้มอบรางวัล</th>
+            <th>รายละเอียด</th>
+            <th sec:authorize="isAuthenticated() and hasRole('User')">ดู</th>
+            <th>ลบ</th>
+        </tr>
+        </thead>
+        <tbody class="text-center">
+        <tr th:each="prize : ${prizes}">
+            <td>
+                <span th:text="${prize.dayToGet}"></span>
+            </td>
+            <td th:text="${prize.tournaments}"></td>
+            <td th:text="${prize.type}"></td>
+            <td th:text="${prize.level}"></td>
+            <td th:text="${prize.sources}"></td>
+            <td th:text="${prize.nameGiver}"></td>
+            <td th:text="${prize.description}"></td>
+            <td>
+                <a class="btn btn-primary" th:href="@{/prizes/{id} (id=${prize.id})} ">ดู</a>
+            </td>
+            <td>
+                <form th:action="@{/prizes/delete/{id}(id=${prize.id})}" method="post">
+                    <button class="btn btn-sm btn-danger" id="delete-button" onclick="return confirm('ต้องการลบข้อมูลนี้หรือไม่?')" type="submit">ลบ</button>
+                </form>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+</body>
+</html>

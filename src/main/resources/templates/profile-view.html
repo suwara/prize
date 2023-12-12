@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+    <meta charset="UTF-8">
+    <title>Show Profile Page</title>
+    <link th:rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+    <script th:src="@{/js/bootstrap.min.js}"></script>
+</head>
+<body>
+<div th:insert="~{fragments/header :: header}"></div>
+
+<div class="container w-75 p-5 my-5">
+    <div class="row">
+        <h1 class="display-6">หน้าโปรไฟล์ของฉัน</h1>
+        <a class="link-offset-3-hover link-underline-opacity-0" th:href="@{/profiles/edit}">แก้ไขโปรไฟล์</a>
+    </div>
+
+    <form th:object="${profiles}">
+        <div class="mb-3">
+            <label for="inputId">#ID</label>
+            <input disabled th:value="${profiles.id}"
+                   name="id" id="inputId" type="text" class="form-control">
+        </div>
+        <div class="mb-3">
+            <label for="inputFirstName">ชื่อ</label>
+            <input disabled th:value="${profiles.firstName}"
+                   name="firstName" id="inputFirstName" type="text" class="form-control">
+        </div>
+        <div class="mb-3">
+            <label for="inputLastName">นามสกุล</label>
+            <input disabled th:value="${profiles.lastName}"
+                   name="lastName" id="inputLastName" type="text" class="form-control">
+        </div>
+        <div class="mb-3">
+            <label for="inputEmail">e-mail</label>
+            <input disabled th:value="${profiles.email}"
+                   name="email" id="inputEmail" type="email" class="form-control">
+        </div>
+        <div class="mb-3">
+            <label for="inputBirthDay">วันเกิด</label>
+            <input disabled th:value="${profiles.birthDay}"
+                   name="birthDay" id="inputBirthDay" type="date" class="form-control">
+        </div>
+        <div class="mb-3">
+            <label for="inputAge">อายุ</label>
+            <input disabled th:value="(${profiles.age})"
+                   name="age" id="inputAge" type="text" class="form-control">
+        </div>
+        <div>
+        </div>
+    </form>
+    <form th:object="${educations}">
+        <p>การศึกษา
+            <a class="btn btn-primary btn-sm" th:href="@{/edu/add}">เพิ่ม</a>
+        </p>
+        <table class="table table-bordered table-striped">
+            <thead class="text-center">
+            <tr>
+                <th>สถาบันการศึกษา</th>
+                <th>ระดับการศึกษา</th>
+                <th>ปีแรกเข้า</th>
+                <th>ปีที่จบการศึกษา</th>
+                <th>แก้ไข</th>
+                <th>ลบ</th>
+            </tr>
+            </thead>
+            <tbody class="text-center">
+            <tr th:each="edu : ${educations}">
+                <td th:text="${edu.nameOfAcademy}"></td>
+                <td th:text="${edu.level}"></td>
+                <td th:text="${edu.yearsStart}"></td>
+                <td th:text="${edu.yearsEnd}"></td>
+                <td>
+                    <a class="btn btn-sm btn-primary" id="edit-button" th:href="@{/edu/edit/{id}(id=${edu.id})}" >แก้ไข</a>
+                </td>
+                <td>
+                    <form th:action="@{/edu/delete/{id}(id=${edu.id})}" method="post">
+                        <button  class="btn btn-sm btn-danger" id="delete-button" onclick="return confirm('ต้องการลบข้อมูลนี้หรือไม่?')" type="submit">ลบ</button>
+                    </form>
+
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </form>
+
+
+
+
+</div>
+</body>
+</html>

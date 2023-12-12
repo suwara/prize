@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Signup Page</title>
+    <link th:rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+    <script th:src="@{/js/bootstrap.min.js}"></script>
+</head>
+<body>
+<div th:insert="~{fragments/header :: header}"></div>
+
+<div class="container w-50 p-5 my-5">
+    <h1 class="display-5">Sign Up</h1>
+
+    <form th:action="@{/signup}" method="POST">
+
+        <div id="error-msg" class="alert alert-danger"
+             th:if="${signupError}">
+            <span th:text="${signupError}"></span>
+        </div>
+
+        <div class="mb-3">
+            <label for="inputUsername">Username</label>
+            <input required id="inputUsername" type="text" class="form-control"
+                   name="username">
+        </div>
+        <div class="mb-3">
+            <label for="inputPassword">Password</label>
+            <input required id="inputPassword" type="password" class="form-control"
+                   name="password">
+        </div>
+        <button id="submit-button" type="submit" class="btn btn-primary">Sign Up</button>
+    </form>
+</div>
+
+
+
+</body>
+</html>

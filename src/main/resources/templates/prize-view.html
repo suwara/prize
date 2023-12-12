@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+    <meta charset="UTF-8">
+    <title>Show A Prize Page</title>
+    <link th:rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+    <script th:src="@{/js/bootstrap.min.js}"></script>
+</head>
+<body>
+<div th:insert="~{fragments/header :: header}"></div>
+
+<div class="container w-50 p-5 my-5">
+    <h1 class="display-6">รายการรางวัลของฉัน</h1>
+    <form th:object="${prize}">
+        <div class="mb-3">
+            <label for="inputId">#ID</label>
+            <input disabled th:value="${prize.id}"
+                   name="id" id="inputId" type="text" class="form-control">
+        </div>
+        <div class="mb-3">
+            <label for="inputDayToGet">วันที่</label>
+            <input disabled th:value="${prize.dayToGet}"
+                   name="dayToGet" id="inputDayToGet" type="date" class="form-control">
+        </div>
+        <div class="mb-3">
+            <label for="inputSource">หน่วยงานที่จัด</label>
+            <input disabled th:value="${prize.sources}"
+                   name="sources" id="inputSource" type="text" class="form-control">
+        </div>
+        <div class="mb-3">
+            <label for="inputTournaments">กิจกรรม</label>
+            <input disabled th:value="${prize.tournaments}"
+                   id="inputTournaments" type="text" class="form-control" name="tournaments">
+        </div>
+        <div class="mb-3">
+            <label for="inputLevel">รางวัลที่ได้รับ</label>
+            <input disabled th:value="${prize.level}"
+                   id="inputLevel" type="text" class="form-control"  name="level">
+        </div>
+        <div class="mb-3">
+            <label for="inputNameGiver">ชื่อผู้มอบรางวัล</label>
+            <input disabled th:value="${prize.nameGiver}"
+                   id="inputNameGiver" type="text" class="form-control" name="nameGiver">
+        </div>
+        <div class="mb-3">
+            <label for="inputDescription">รายละเอียด</label>
+            <textarea disabled th:text="${prize.description}" id="inputDescription" type="text" rows="4" class="form-control"
+                      name="description"></textarea>
+        </div>
+    </form>
+    <div class="d-grid gap-2 d-md-block">
+        <a class="btn btn-secondary" th:href="@{/prizes}">ย้อนกลับ</a>
+        <a class="btn btn-primary" th:href="@{/prizes/edit/{id}(id=${prize.id})}">แก้ไข</a>
+    </div>
+
+</div>
+</body>
+</html>

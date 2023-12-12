@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit Education Page</title>
+    <link th:rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+    <script th:src="@{/js/bootstrap.min.js}"></script>
+</head>
+<body>
+<div th:insert="~{fragments/header :: header}"></div>
+
+<div class="container w-50 p-5 my-5">
+    <h1 class="display-5">แก้ไขการศึกษาของฉัน</h1>
+    <form th:action="@{/edu/edit}" th:object="${education}" method="post">
+        <div class="form-group">
+            <div class="visually-hidden">
+                <input name="id" id="inputId" th:value="${education.id}" type="text">
+            </div>
+            <div class="mb-3">
+                <label for="inputNameOfAcademy">ชื่อสถาบันการศึกษา</label>
+                <input required type="text" class="form-control" id="inputNameOfAcademy"
+                       name="nameOfAcademy" th:value="${education.nameOfAcademy}" >
+            </div>
+            <div class="mb-3">
+                <label for="inputLevel">ระดับการศึกษา</label>
+                <select th:value="${education.level}" id="inputLevel" name="level" class="form-select" >
+                    <option>ระดับประถมศึกษา</option>
+                    <option>ระดับมัธยมศึกษา</option>
+                    <option>ระดับอุดมศึกษา</option>
+                </select>
+            </div>
+            <div class="mb-3">
+                <label for="inputYearStart">ปีแรกเข้า</label>
+                <input required th:value="${education.yearsStart}" id="inputYearStart" type="text" class="form-control"
+                       name="yearsStart">
+            </div>
+            <div class="mb-3">
+                <label for="inputYearEnd">ปีที่จบการศึกษา</label>
+                <input required th:value="${education.yearsEnd}" id="inputYearEnd" type="text" class="form-control"
+                       name="yearsEnd">
+            </div>
+            <button id="submit-button" type="submit" class="btn btn-primary">ยืนยัน</button>
+            <a id="back-button" class="btn btn-secondary" th:href="@{/profiles}">ย้อนกลับ</a>
+        </div>
+    </form>
+
+</div>
+</body>
+</html>

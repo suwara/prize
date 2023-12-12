@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit Prizes Page</title>
+    <link th:rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+    <script th:src="@{/js/bootstrap.min.js}"></script>
+</head>
+<body>
+<div th:insert="~{fragments/header :: header}"></div>
+
+<div class="container w-50 p-5 my-5">
+    <h1 class="display-6">แก้ไขรายการรางวัลของคุณ</h1>
+
+    <form th:action="@{/prizes/edit}" th:object="${prizes}" method="post">
+        <div class="mb-3">
+            <input th:value="${prizes.id}"
+                   name="id" id="inputId" type="text" class="visually-hidden">
+        </div>
+        <div class="mb-3">
+            <label for="inputDayToGet">วันที่</label>
+            <input required th:value="${prizes.dayToGet}"
+                   name="dayToGet" id="inputDayToGet" type="date" class="form-control" data-date-language="th-th">
+        </div>
+        <div class="mb-3">
+            <label for="inputSource">หน่วยงานที่จัด</label>
+            <input required th:value="${prizes.sources}"
+                   name="sources" id="inputSource" type="text" class="form-control">
+        </div>
+        <div class="mb-3">
+            <label for="inputTournaments">กิจกรรม</label>
+            <input required th:value="${prizes.tournaments}"
+                   id="inputTournaments" type="text" class="form-control" name="tournaments">
+        </div>
+        <div class="mb-3">
+            <label for="inputLevel">รางวัลที่ได้รับ</label>
+            <input required th:value="${prizes.level}"
+                   id="inputLevel" type="text" class="form-control"  name="level">
+        </div>
+        <div class="mb-3">
+            <label for="inputType" class="form-label">ประเภท</label>
+            <select th:value="${prizes.type}" id="inputType" class="form-select" name="type">
+                <option>เกียรติบัตร</option>
+                <option>โล่รางวัล</option>
+                <option>ถ้วยรางวัล</option>
+            </select>
+        </div>
+        <div class="mb-3">
+            <label for="inputNameGiver">ชื่อผู้มอบรางวัล</label>
+            <input required th:value="${prizes.nameGiver}"
+                   id="inputNameGiver" type="text" class="form-control" name="nameGiver">
+        </div>
+        <div class="mb-3">
+            <label for="inputDescription">รายละเอียด</label>
+            <textarea th:text="${prizes.description}" id="inputDescription" type="text" rows="4" class="form-control"
+                      name="description"></textarea>
+        </div>
+        <button id="submit-button" type="submit" class="btn btn-primary">ยืนยัน</button>
+        <a id="back-button" class="btn btn-secondary" th:href="@{/prizes/{id} (id=${prizes.id})}">ย้อนกลับ</a>
+    </form>
+</div>
+</body>
+</html>

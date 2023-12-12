@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit Member Page</title>
+    <link th:rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+    <script th:src="@{/js/bootstrap.min.js}"></script>
+</head>
+<body>
+<div th:insert="~{fragments/header :: header}"></div>
+
+<div class="container w-50 p-5 my-5">
+    <h1 class="display-5">แก้ไขข้อมูลสมาชิก</h1>
+
+    <form th:action="@{/admin/members/edit}" th:object="${member}" method="post">
+        <div class="form-group">
+            <div class="visually-hidden">
+                <input type="text" name="id" id="inputId" th:value="${member.id}">
+            </div>
+            <div class="mb-3">
+                <label for="inputUsername">Username</label>
+                <input  id="inputUsername" type="text" class="form-control" th:value="${member.username}"
+                       name="username" required>
+            </div>
+            <div class="mb-3">
+                <label for="inputRole" class="form-label">ประเภท</label>
+                <select id="inputRole" type="text" class="form-select" name="role" th:value="${member.role}">
+                    <option>User</option>
+                    <option>Admin</option>
+                </select>
+            </div>
+            <button id="submit-button" type="submit" class="btn btn-primary">Confirm</button>
+            <a id="back-button" class="btn btn-secondary" th:href="@{/admin/members}">Back</a>
+        </div>
+    </form>
+</div>
+
+</body>
+</html>
